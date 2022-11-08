@@ -1,16 +1,77 @@
-# counter_7
+# Tugas 7
+> Rahfi A - 2106705764
 
-A new Flutter project.
+---
 
-## Getting Started
+## 1. Stateless Vs Stateful Widget<br>
+- **Stateless Widget**<br> 
+  Widget yang statenya tidak bisa diubah ketika sudah dibuat. state yang dimaksud, misalnya warna, data, dan atau variabel.
+  
+- **Stateful Widget**<br>
+  Widget yang statenya bisa diubah ketika widget sudah dibuat. State yang dimaksud misalnya style widget, data, dan atau variabel. Stateful widget cocok untuk membuat widget atau fitur yang interaktif yang membutuhkan state yang dinamis.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## 2. Widget(s) used<br>
+- Scaffold
+- Appbar
+- Center
+- Column
+- Row
+- Text
+- Padding
+- Spacer
+- FLoatingActionButton
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 3. setState()<br>
+Pemangggilan setState() akan memberitahu framework bahwa terjadi perubahan state pada objek tersebut. Kemudian, Framework akan melakukan build ulang pada objek tersebut (*re-render*) pada UI aplikasi. variable yang dapat terdampak adalah variable/data yang di pass sebagai argumen pada inner function setState
+
+## 4. const vs final
+Pada dasarnya const dan final sama-sama menyatakan variable yang bernilai tetap, tidak dapat diubah sama sekali. perbedaanya adalah `final` membuat variabel menjadi bernilai tetap dari awal deklarasi, sedangkan `const` membuat suatu nilai konstan pada saat compile-time. akibatnya, data `const` masih bisa diubah sebelum compile-time berlangsung.
+
+## 5. Implementation<br>
+- Buat variable pembantu di dalam function build
+```dart
+ bool isEven = _counter % 2 == 0;
+ bool isGreaterThanZero = _counter > 0;
+```
+- Gunakan boolean variable tersebut untuk melakukan conditional styling dan render.
+```dart
+ Text(
+      isEven ? 'GENAP' : 'GANJIL',
+      style : TextStyle(color: isEven ? Colors.red : Colors.blue )
+ ) 
+```
+- Buat Widget Padding yang membungkus Row Layout, dan terapkan padding.
+```dart
+floatingActionButton: Padding(
+        padding : const EdgeInsets.all(16.0),
+        child: Row(
+         .
+         .
+         .
+        ))
+```
+
+- Buat 2 tombol "add" dan "substract", dan lakukan positioning serta definisikan onPressed Event.
+```dart
+floatingActionButton: Padding(
+        padding : const EdgeInsets.all(16.0),
+        child: Row(
+          children: <Widget>[
+            FloatingActionButton(
+              onPressed: isGreaterThanZero ?  _decrementCounter : null,
+              tooltip: 'Decrement',
+              child: const Icon(Icons.remove),
+              backgroundColor: isGreaterThanZero ? Colors.blue : Colors.grey,
+            ),
+            const Spacer(),
+            FloatingActionButton(
+              onPressed: _incrementCounter,
+              tooltip: 'Increment',
+              child: const Icon(Icons.add),
+            ),
+          ]
+        )
+      )
+```
