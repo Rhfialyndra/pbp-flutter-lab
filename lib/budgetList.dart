@@ -42,9 +42,9 @@ class _BudgetListState extends State<BudgetList>{
                   return Card(
                     child: ListTile(
                         title: Text(widget.myBudgetList[index]
-                            .title), // ini judul isinya malah nominal
+                            .title),
                         subtitle: Text(
-                          f.format(widget.myBudgetList[index].budgetNominal)), // ini nominal isinya gaada
+                          f.format(widget.myBudgetList[index].budgetNominal)), 
                         trailing: Column(
                           children: [
                             Text(widget.myBudgetList[index].date,

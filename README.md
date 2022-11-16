@@ -75,3 +75,133 @@ floatingActionButton: Padding(
         )
       )
 ```
+
+---
+
+# **Tugas 8**
+
+###  **Navigator.push** vs **Navigator.pushReplacement**
+
+-   `Navigator.push`: berfungsi untuk menambahkan route baru ke stack navigasi
+-   `Navigator.pushReplacement`: berfungsi untuk mengganti route yang ada di stack navigasi dengan route baru
+
+### Widget(s)
+- Scaffold             : Construct a skeleton to build widget(s). 
+- Appbar               : default widget to create navbar-like appbar
+- Center               : Layout Widget to position children on the middle
+- Column               : Layout widget for column display
+- Row                  : Layout widget for Row Display
+- Text                 : Text creation
+- Padding              : Widget to wrap children with padding
+- Spacer               : Widget to create space between children, behaves like flex
+- Container            : Widget as container to contains any other widget, behaves like div on html
+- Form                 : Widget of form
+- ListTile             : Behaves like inline widget that stores children on linear ordering (leading, traliing, etc)
+- Drawer               : side-navbar like
+- Expanded             : Widget that takes all the remaining space
+- MaterialPageRoute    : Widget that refresh and render the entire page
+- TextFormField        : input field
+
+### Jenis event pada Flutter
+
+-   onTap: event yang terjadi ketika widget di tap
+-   onPressed: event yang terjadi ketika widget di tekan
+-   onChanged: event yang terjadi ketika widget diubah
+-   onSaved: event yang terjadi ketika widget disimpan
+
+### Cara kerja `Navigator` saat mengganti halaman aplikasi
+
+Navigator mengatur route dalam sebuah stack yang menyimpan page-page disertai dengan animasi transisi. _logic_ yang digunakan untuk next sama dengan Stack.push(), sedangkan untuk kembali sama dengan Stack.pop();
+
+### Implementation
+
+- add Intl package to pubspec.yaml
+```dart
+dependencies:
+  flutter:
+    sdk: flutter
+  intl: ^0.16.1   # here
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+```
+
+- create Drawer on a different file for reusability and implement routing.
+- create BudgetForm, and disable button when formIsInvalid
+```dart
+TextButton(
+          style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(formIsValid ? Colors.blue : Colors.grey),
+          ),
+          onPressed: formIsValid ? addTobudgetList : null , 
+          child: const Text(
+            "simpan",
+            style: TextStyle(color : Colors.white)
+          ))
+```
+- create Budget model or class
+```dart
+
+class Budget {
+  late String title;
+  late String type;
+  late String date;
+  late int budgetNominal;
+
+  Budget(this.title, this.type, this.date, this.budgetNominal);
+
+}
+```
+- create List on BudgetForm Widget and pass it to budgetList builder
+
+- create BudgetList widget that takes list of Budget as the param
+```dart
+class BudgetList extends StatefulWidget {
+  List<Budget> myBudgetList;
+  BudgetList({super.key, required this.myBudgetList});
+
+  @override
+  State<BudgetList> createState() => _BudgetListState();
+}
+. 
+.
+.
+```
+- use itemBuilder to render all of the item from List of budget|
+```dart
+itemBuilder: (context, index) {
+            return Card(
+              child: ListTile(
+                  title: Text(widget.myBudgetList[index]
+                      .title),
+                  subtitle: Text(
+                    f.format(widget.myBudgetList[index].budgetNominal)), 
+                  trailing: Column(
+                    children: [
+                      Text(widget.myBudgetList[index].date,
+                      style : TextStyle( fontSize: 11.0)),
+                      const Spacer(),
+                      Text(widget.myBudgetList[index].type,
+                      style: TextStyle(color: (widget.myBudgetList[index].type == "pemasukan") ? Colors.blue : Colors.red )),
+                    ],
+                  )
+                ),
+            );
+          }
+```
+- use NumberFormat class to do currency formatting
+```dart
+var f = NumberFormat.currency(locale: "id_ID",
+      symbol: "Rp");
+      .
+      .
+      .
+       subtitle: Text(
+                      f.format(widget.myBudgetList[index].budgetNominal)
+                      ),
+      .
+      .
+      .
+```
