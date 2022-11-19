@@ -1,5 +1,6 @@
-import 'package:counter_7/budget.dart';
+import 'package:counter_7/model/budget.dart';
 import 'package:counter_7/budgetList.dart';
+import 'package:counter_7/watchlist.dart';
 import 'package:flutter/material.dart';
 import 'package:counter_7/budgetForm.dart';
 import 'package:counter_7/main.dart';
@@ -48,6 +49,15 @@ class _AppDrawerState extends State<AppDrawer>{
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => BudgetList( myBudgetList: widget.myBudgetList,)),
+              );
+            },
+          ),ListTile(
+            title: const Text('Watchlist'),
+            onTap: () {
+              // Route menu ke halaman form
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const WatchListPage()),
               );
             },
           ),
