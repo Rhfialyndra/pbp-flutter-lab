@@ -228,9 +228,9 @@ Kita bisa melakukan fetching dan deserialization secara manual tanpa membuat mod
   -  Menampilkan data dari model Watchlist
 
 ### Implementation
-1 - set internet android permission
-2 - create Model for JSON object
-3 - create function for fetching data to API
-4 - use FutureBuilder to render fetched data
-5 - create detail page
-6 - integrate with Drawer
+1. set internet android permission
+2. create Model for JSON object
+3. create function for fetching data to API
+4. use FutureBuilder to render fetched data
+5. create detail page
+6. integrate with Drawer
