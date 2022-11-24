@@ -205,3 +205,32 @@ var f = NumberFormat.currency(locale: "id_ID",
       .
       .
 ```
+
+---
+
+# **Tugas 9**
+
+### Fetching JSON object tanpa Model
+Kita bisa melakukan fetching dan deserialization secara manual tanpa membuat model terlebih dahulu.Namun, cara tersebut sangat tidak disarankan, sebab _type_ yang kita deklarasikan menjadi "tidak berguna" akibat value json yang berupa dynamic sehingga error akan lebih mudah terjadi pada app kita.
+
+### Widget yang digunakan pada aplikasi ini
+
+  -  FutureBuilder: widget yang digunakan untuk menampilkan data dari Future response API
+   - CircularProgressIndicator: loading circle bar widget
+   - Card: widget yang digunakan untuk menampilkan data dalam bentuk kartu
+   - ListTile: widget yang digunakan untuk menampilkan data dalam bentuk list
+   
+### Mekanisme pengambilan data dari JSON hingga ditampilkan pada flutter
+
+  -  Membuat model Watchlist
+  -  Fetch JSON dari API
+  -  Menyimpan JSON ke dalam model Watchlist
+  -  Menampilkan data dari model Watchlist
+
+### Implementation
+1 - set internet android permission
+2 - create Model for JSON object
+3 - create function for fetching data to API
+4 - use FutureBuilder to render fetched data
+5 - create detail page
+6 - integrate with Drawer
